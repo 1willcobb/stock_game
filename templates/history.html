@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <h2>Stock Portfoilio</h2>
+    <table class="mb-3 mx-auto w-100">
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Shares</th>
+            <th>Price At Transaction</th>
+            <th>Transaction Type</th>
+            <th>Time Stamp</th>
+        </tr>
+        {% for stock in history %}
+        <tr>
+            <td>{{ stock.stock_symbol }}</td>
+            <td>{{ stock.stock_name }}</td>
+            <td>{{ stock.shares }}</td>
+            <td>${{ "%.2f"|format(stock.price) }}</td>
+            <td>{{ stock.sell_buy }}</td>
+            <td>{{ stock.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

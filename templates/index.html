@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <h2>Stock Portfoilio</h2>
+    <table class="mb-3 mx-auto w-100">
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Shares</th>
+            <th>Purchased Price</th>
+            <th>Current Price</th>
+            <th>Percent gain/loss</th>
+            <th>TOTAL</th>
+        </tr>
+        {% for stock in portfolio %}
+        <tr>
+            <td>{{ stock.stock_symbol }}</td>
+            <td>{{ stock.stock_name }}</td>
+            <td>{{ stock.shares }}</td>
+            <td>${{ "%.2f"|format(stock.purchased_price) }}</td>
+            <td>${{ "%.2f"|format(current_prices[loop.index - 1]) }}</td>
+            <td>{{ "%.2f"|format(percentages[loop.index - 1]) }}%</td>
+            <td>$ {{ "%.2f"|format(current_prices[loop.index - 1] * stock.shares) }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>CASH</th>
+            <td>${{ "%.2f"|format(cash) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>TOTAL</th>
+            <td>${{ "%.2f"|format(total) }}</td>
+        </tr>
+    </table>
+
+{% endblock %}
